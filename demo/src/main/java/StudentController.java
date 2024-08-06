@@ -1,4 +1,7 @@
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,10 +15,13 @@ public class StudentController {
     @Autowired
     private StudentRepository studentRepository;
 
-    @PostMapping
-    public Student createStudent(@RequestBody Student student){
+    @PostMapping("/addStudent")
+   private ResponseEntity<Student> addStudent(@RequestBody Student student){
 
-        return studentRepository.save(student);
+        studentRepository.save(student);
+
+        return  ResponseEntity.ok(student);
+
     }
 
     @GetMapping
